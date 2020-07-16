@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <link rel="stylesheet" href=style.css>
+<script src="ajax.js"></script>
 <html>
     <head>
         <title>Find your Menu!</title>
@@ -10,8 +11,8 @@
             <h1>Restaurant Search</h1>
             <form>
                 <label>Restaurant Name:</label>
-                <input type = "text">
-                <input type = "submit"  class="btn btn-light" value="Search">
+                <input type = "text" id = "searchbar">
+                <input type = "button"  onclick =submitSearch() class="btn btn-light" value="Search">
             </form>
         </div>
         <div class="fixed-bottom">
