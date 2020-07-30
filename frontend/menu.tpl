@@ -1,9 +1,9 @@
-<!DOCTYPE html>
 <html>
     <head>
         <title>Edit Menu</title>
+        <script src="ajax.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
-<link rel="stylesheet" type="text/css" href=../style.css />
+        <link rel="stylesheet" type="text/css" href=../style.css />
     </head>
     <body>
         <div>
@@ -18,7 +18,7 @@
                     <li class = "padding-bottom">{{vals[0]}} ... {{vals[1]}}
                         <br>&nbsp; &nbsp; &nbsp;<span>{{vals[2]}}</span> <button type="button" class="btn btn-danger">delete {{vals[0]}}</button></li>
                     %end
-                    <li><form>
+                    <li><form id = "item-form">
                         <label>Item: 
                             <input type="text" name="item-{{vals[0]}}"/>
                         </label>
@@ -29,20 +29,21 @@
                         <label>Description:
                                 <input type="text" name="Desc-{{vals[0]}}"/>
                         </label>
-                        <button class="btn btn-success" type= "submit">Add New Item</button>
+                        <input type = "button" class="btn btn-success" onclick = "addItem()" value="Add New Item<">
+                        {* <button class="btn btn-success"  onclick = "addItem()" type= "submit">Add New Item</button> *}
                         </form>
                     </li>
                 </ul>
                 <hr>
             %end
-                <h4><form>
+                <h4><form id = "section-form">
                     <label>
                     Section Header:<input type="text" name="section"/>
                     </label>
                     <button class="btn btn-success" type= "submit">Add New Section</button>
                 </form></h4>
             <div>
-                <button type="button" class="btn btn-success">Save</button>
+                <button type="button" class="btn btn-success" onclick = "addSection()">Save</button>
             </div>
         </div>
     </body>

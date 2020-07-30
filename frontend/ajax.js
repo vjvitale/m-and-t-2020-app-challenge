@@ -15,3 +15,22 @@ function login(){
         }
     }
 }
+
+// function deletItem(){
+
+// }
+
+// function deleteSection(){
+
+// }
+
+function addItem(){
+    var form = document.getElementById("item-form");
+    console.log(form);
+}
+
+function addSection(){
+    var form = document.getElementById("section-form");
+    console.log(form);
+
+}
