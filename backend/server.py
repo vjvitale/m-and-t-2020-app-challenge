@@ -61,6 +61,7 @@ def serve_resturant_edits(resturant_name):
 		each key is a section header
 		each list contains tuples that has the item and price of each item and a description
 	"""
+	#Call to Database
 	retVal = {"name" : "", "items":{}}
 
 	retVal["name"] = "Eggs Dee"
