@@ -28,7 +28,7 @@ def serve_login():
 	return static_file("login.html", root=file_root, mimetype="text/html")
 
 
-@app.post('/results'):
+@app.post('/results')
 @app.veiw("results.tpl")
 def serve_search():
 	"""
