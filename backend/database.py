@@ -16,33 +16,40 @@ def loginUser(username, password):
     password_hash = hashlib.pbkdf2_hmac("sha256", password, salt, 100000)
     my_cursor.execute("INSERT INTO users (username, password) VALUES (username, password_hash)")
 
-def delectionItem(item):
-    name = item["name"]
-    price = item["price"]
-    description = item["description"]
-    my_cursor.execute("DELETE FROM menu-item WHERE name == name AND price == price AND description == description")
+def delectionItem(item_id):
+
+    my_cursor.execute("DELETE FROM menu-item WHERE id = %s", (item_id))
     
 
-def deleteSection(section):
+def deleteSection(s_id):
     #Need to implement backend part
-    name = section["name"]
-    id = section["id"]
-    my_cursor.execute("DELETE FROM menu-item WHERE section_id == id")
-    my_cursor.execute("DELETE FROM section WHERE name == name AND id == id")
+    
+    my_cursor.execute("DELETE FROM menu-item WHERE section_id = %s", (s_id))
+    my_cursor.execute("DELETE FROM section WHERE section_id = %s" (s_id))
+
+
 
 def addItem(item):
     name = item["name"]
     price = item["price"]
     description = item["description"]
-    id = item["id"]
+    iD = item["id"]
     
-    my_cursor.execute("INSERT INTO menu-item (name, price, description, section_id) VALUES (name, price, description, id)")
+    my_cursor.execute("INSERT INTO menu-item (name, price, description, section_id) VALUES (name, price, description, iD)")
+    my_cursor.execute("SELECT id FROM menu-item WHERE name = %s AND price = %s AND description = %s AND section_id = %s", (name, price, description, iD))
+    item_id = my_cursor.fetchall()
+
+    return {"item" : name, "price": price, "description": description, "item_id": item_id[0][0]}
 
 def addSection(section):
     name = section["section"]
     res = section["res_id"]
 
     my_cursor.execute("INSERT INTO section (name, restaurant_id) VALUES (name, res)")
+    my_cursor.execute("SELECT id FROM section WHERE name = %s AND restaurant_id = %s", (name, res))
+    sect_id = my_cursor.fetchall()
+
+    return {"section": name, "sid": sect_id}
 
 def searchRestaurant(resturant_name):
     retVal = {"restaurant": []}
@@ -77,6 +84,7 @@ def searchRestaurantId(rid):
     retVal["name"] = result[0][1]
     retVal["items"] = sectionItems
     retVal["sections"] = {}
+    retVal["restaurant_id"] = rid
 
     for sec in range(len(section_result[0])):
         retVal["sections"][section_result[0][sec]] = section_result[1][sec]
