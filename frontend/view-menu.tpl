@@ -7,6 +7,7 @@
     <body>
         <div>
             <h2>{{name}}</h2>
+            <p>{{description}}</p>
             <hr>
             %for item in items.keys():
             <div class = "row, padding-left">

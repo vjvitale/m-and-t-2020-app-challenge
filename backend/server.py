@@ -199,19 +199,37 @@ def serve_newSection():
 @app.post("/removeItem")
 def serve_removeItem():
 	req = request.body.read()
-	data = json.laods(req)
+	data = json.loads(req)
 
-	data.delectionItem(data)
+	database.delectionItem(data)
 
 	return "deleted"
 
 @app.post("/removeSection")
 def serve_removeSection():
 	req = request.body.read()
-	data = json.laods(req)
+	data = json.loads(req)
 
-	data.delelteSection(data)
+	database.delelteSection(data)
 
 	return "deleted"
+
+@app.post("/updateDesc")
+def serve_updateDesc():
+	req = request.body.read()
+	data = json.loads(req)
+
+	database.updateRestaurantdescription(data["id"], data["description"])
+
+	return "updated"
+
+@app.post("/updateName")
+def serve_updateDesc():
+	req = request.body.read()
+	data = json.loads(req)
+
+	database.updateRestaurantdescription(data["id"], data["name"])
+
+	return "updated"
 
 app.run(host='localhost', port=8080)

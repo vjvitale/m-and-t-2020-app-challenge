@@ -7,8 +7,16 @@
     </head>
     <body>
         <div id="sections">
-            <h2>{{name}} &nbsp; <button type="button" onclick= "changeName({{restaurant_id}})" class="btn btn-danger">change name</button></h2>
-            <p>{{description}}</p><span><button type="button" onclick= "changeDescription({{restaurant_id}})" class="btn btn-danger">Edit Description</button></span>
+            <h2 id="rest_name">{{name}} &nbsp;</h2>
+            <h2><form onsubmit="changeName('{{restaurant_id}}'); return false;"> 
+                    <input type ="text" id="r_name" />
+                    <input type ="submit" class="btn btn-dange" value="New Name"/>
+            </form></h2>
+            <p id="description">{{description}}</p>
+            <form onsubmit="changeDescription('{{restaurant_id}}'); return false;"> 
+                    <input type ="text" id="desc" />
+                    <input type ="submit" class="btn btn-dange" value="New Description"/>
+            </form>
             <hr>
             %for item in items.keys():
             <div class = "row, padding-left">
