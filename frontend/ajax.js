@@ -3,30 +3,34 @@ function submitSearch(){
     // console.log(text);
 }
 
+function test(){
+    console.log("Test");
+}
+
 function login(){
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     // console.log(username + " and " + password);
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function(){
-        if (this.readyState === 4 && this.status === 200){
-            console.log(this.response);
+    // var request = new XMLHttpRequest();
+    // request.onreadystatechange = function(){
+    //     if (this.readyState === 4 && this.status === 200){
+    //         console.log(this.response);
             
-        }
-    }
+    //     }
+    // }
 }
 
-// function deletItem(){
+function deletItem(){
 
-// }
+}
 
-// function deleteSection(){
+function deleteSection(){
 
-// }
+}
 
 function addItem(){
-    var form = document.getElementById("item-form");
-    console.log(form);
+    var text = document.getElementById("itemForm");
+    console.log(text);
 }
 
 function addSection(){

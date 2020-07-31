@@ -12,13 +12,35 @@ my_cursor = mydb.cursor()
 
 def loginUser(username, password):
     #hash password before entering into database
-    my_cursor.execute("")
+    my_cursor.execute("INSERT INTO users (username, passwoerd) VALUES (username, password)")
 
 def delectionItem(item):
+    name = item["name"]
+    price = item["price"]
+    description = item["description"]
+    my_cursor.execute("DELETE FROM menu-item WHERE name == name AND price == price AND description == description")
     
 
 def deleteSection(section):
+    #Need to implement backend part
+    name = section["name"]
+    id = section["id"]
+    my_cursor.execute("DELETE FROM menu-item WHERE section_id == id")
+    my_cursor.execute("DELETE FROM section WHERE name == name AND id == id")
 
+def addItem(item):
+    name = item["name"]
+    price = item["price"]
+    description = item["description"]
+    id = item["id"]
+    
+    my_cursor.execute("INSERT INTO menu-item (name, price, description, section_id) VALUES (name, price, description, id)")
+
+def addSection(section):
+    name = section["section"]
+    res = section["res_id"]
+
+    my_cursor.execute("INSERT INTO section (name, restaurant_id) VALUES (name, res)")
 
 def searchRestaurant(resturant_name):
     retVal = {}
@@ -45,7 +67,3 @@ def searchRestaurant(resturant_name):
             retVal[resName] = sectionItems
         
         return retVal
-        
-
-
-# query = SELECT name FROM table_name;
