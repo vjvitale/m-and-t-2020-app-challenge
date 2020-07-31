@@ -1,8 +1,12 @@
 body, h1, h2, h3, h4, p {
     color: white;
 }
+h1{
+font-family: 'Lobster', cursive;
+}
 body{
     background-color: #1d7bf3;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 hr{
 	 border-top: 1px solid white;
