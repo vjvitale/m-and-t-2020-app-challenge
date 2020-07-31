@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href=style.css>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <script src="ajax.js"></script>
+	<title>Registration</title>
+</head>
+<body>
+	<div class="Regristration">
+      <h1 class="Registration-Heading1">Registration</h1>
+      <br/>
+      <br/>
+        <form action="/register-process" method="post">
+        <label>
+          Username:
+          <input type ="text" id="user_name" name="username" minlength="1" maxlength="19"/>
+        </label>
+        <br/>
+        <br/>
+        <label>
+          Password:
+          <input type="password" id="pass_word" name="password" minlength="8" maxlength="24"/><br>
+            Must be at least 8 characters<br>
+            Must include at least one number and one uppercase letter
+        </label>
+        <br/>
+        <br/>
+        <button type ="submit" value="Register" onclick="registerUser()"    ></button>
+        </form>
+    </div>
+</body>

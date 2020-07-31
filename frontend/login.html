@@ -31,13 +31,20 @@
   </nav>
   <div class="text-center">
     <h1>Login</h1>
-    <form>
+    <form action="/login-confirm" method="post">
       <label>USERNAME: </label>
-      <input type = "text" id = "username"><br>
+      <input type = "text" id = "username" name = "user"><br>
       <label>PASSWORD: </label>
-      <input type = "password" id = "password"><br>
-      <input type = "button" onclick = "login()" value="Submit">
+      <input type = "password" id = "password" name = "passwd"><br>
+      <button type="submit" onclick="loginUser()"> Login </button>
     </form>
+    <div class="Register-Link">
+      <a class="active" href="/register">
+          Register
+      </a>
   </div>
+  </div>
+  
+</div>
 </body>
 </html>

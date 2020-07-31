@@ -1,7 +1,7 @@
 #Created by Veornica Vitale on 8 July 2020
 #Server using bottle
 
-from bottle import get, route, run, Bottle, static_file, view, request
+from bottle import get, route, run, Bottle, static_file, view, request, redirect
 import bottle
 import json
 import database
@@ -10,8 +10,17 @@ import database
 import bcrypt
 import random
 import hashlib
+import mysql.connector
 
 app = Bottle()
+mydb = mysql.connector.connect(
+    host = "localhost",
+    user = "root",
+    password = "root",
+    database = "m-and-t"
+    )
+
+mycursor = mydb.cursor()
 #base of where all static pages are served from
 file_root = "../frontend"
 #base of where all templates are served from
@@ -28,20 +37,20 @@ def serve_login():
 	return static_file("login.html", root=file_root, mimetype="text/html")
 
 
-@app.post('/results')
-@app.veiw("results.tpl")
-def serve_search():
-	"""
-	Template foramt
-	a dictionary with one key resturants
-	resturants is a list of lists
-	 the frist element of each list is the name, the second is the description and the third is the id
-	"""
-	retVal = {"restuarunt": []}
+# @app.post('/results')
+# @veiw("results.tpl")
+# def serve_search():
+# 	"""
+# 	Template foramt
+# 	a dictionary with one key resturants
+# 	resturants is a list of lists
+# 	 the frist element of each list is the name, the second is the description and the third is the id
+# 	"""
+# 	retVal = {"restuarunt": []}
 
-	retVal = database.searchRestaurant("RESTAURNT NAME FROM REQUEST")
+# 	retVal = database.searchRestaurant("RESTAURNT NAME FROM REQUEST")
 
-	return retVal
+# 	return retVal
 
 
 #serves the restuarunt's menu
@@ -94,6 +103,75 @@ def serve_ajax():
 @app.get('/edit.js')
 def serve_ajax():
 	return static_file("ajax.js", root=file_root, mimetype="text/javascript")
+
+@app.post("/login-confirm")
+def confirmLogin():
+    username = request.forms["user"]
+    password = request.forms["passwd"]
+    select = "SELECT * FROM users WHERE username= %s"
+    mycursor.execute(select, (username,))
+    row = mycursor.fetchone()
+    if row is not None:
+        if bcrypt.checkpw(str(password).encode('utf-8'), str(row[2]).encode('utf-8')):
+            redirect('/e/<resturant_name>')
+        else:
+            return "Incorrect credentials."
+    else:
+        redirect('/register')
+
+@app.post("/register-process")
+def processRegister():
+    username = request.forms["username"]
+    password = request.forms["password"]
+    # # this is where you should check if password meets criteria
+    # # if it does hash the pw and store it in the database
+    select = "SELECT * FROM users WHERE username= %s"
+    mycursor.execute(select, (username,))
+    row = mycursor.fetchone()
+    if row is not None:
+        return "Username already in use."
+    if len(username) < 5:
+        return "Username is too short."
+    if len(username) > 20:
+        return "Username is too long."
+
+    if checkCriteria(str(password)) == "valid":
+        hashedpw = saltAndHash(password)
+        hashedpw = str(hashedpw.decode('utf-8'))
+        reg_stmt = (
+        "INSERT INTO users (username, password) "
+        "VALUES (%s, %s)"
+        )
+        reg_val = (username, hashedpw)
+        mycursor.execute(reg_stmt, reg_val)
+        mydb.commit()
+        redirect('/login')
+    else:
+        return checkCriteria(str(password))
+
+@app.get("/register")
+def serveRegister():
+    return static_file("register.html", root=file_root, mimetype="text/html")
+
+# @app.get('/login')
+# def serveLogin():
+#     return static_file("login.html", root= file_root, mimetype="text/html")
+
+
+def checkCriteria(password):
+    if len(password) < 8:
+        return "Password must be at least 8 characters."
+    if len(password) > 255:
+        return "Password has too many characters."
+    if password.islower():
+        return "Password must contain an uppercase character."
+    if not any(char.isdigit() for char in password):
+        return "Password must contain a number."
+    return "valid"
+
+def saltAndHash(password):
+    hashedpw = bcrypt.hashpw(str(password).encode('utf-8'), bcrypt.gensalt())
+    return hashedpw
 
 @app.post('/addItem')
 def serve_newItem():

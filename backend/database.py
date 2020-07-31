@@ -61,7 +61,7 @@ def searchRestaurant(resturant_name):
     retVal = {"restaurant": []}
     sectionItems = {}
     my_cursor.execute("SELECT name, id, description FROM restaurant WHERE name == resturant_name")
-    result = mycursor.fetchall()
+    result = my_cursor  .fetchall()
     if len(result[0]) == 0:
         return retVal
     else:
@@ -78,16 +78,13 @@ def searchRestaurantId(rid):
 
     mycursor.execute("SELECT name, description FROM restaurant WHERE id == rid")
     result = mycursor.fetchall()
-
-
-
     my_cursor.execute("SELECT name, id FROM section WHERE restaurant_id == rid")
-    section_result = mycursor.fetchall()
+    section_result = my_cursor.fetchall()
 
     for i in range(0, len(section_result[1])):
         sId = section_result[1][i]
-        my_cursor.execute("SELECT name, price, description, id FROM menu-item WHERE section_id == sId")
-        items = mycursor.fetchall()
+        my_cursor.execute("SELECT name, price, description FROM menu-item WHERE section_id == sId")
+        items = my_cursor.fetchall()
         sectionName = section_result[0][i]
         sectionItems[sectionName] = items
 

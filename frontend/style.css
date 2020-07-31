@@ -1,4 +1,4 @@
-body, h1, h2, h3, h4, p {
+body, h1, h2, h3, h4, p, a {
     color: white;
 }
 h1{
@@ -12,3 +12,4 @@ hr{
 	 border-top: 1px solid white;
 	 padding: 10px;
 }
+
