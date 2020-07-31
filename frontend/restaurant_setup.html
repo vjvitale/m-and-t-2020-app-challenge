@@ -10,23 +10,20 @@
 <body>
     <div class="text-center">
 	<div class="Regristration">
-      <h1 class="Registration-Heading1">Registration</h1>
+      <h1 class="Registration-Heading1">Restaurant Setup</h1>
       <br/>
       <br/>
-        <form action="/register-process" method="post">
+      <p>Enter your restaurant's name and a description of what your resturant does.</p>
+        <form action="/register-restaurant" method="post">
         <label>
-          Username:
-          <input type ="text" id="user_name" name="username" minlength="1" maxlength="19"/>
+          Restaurant Name:
+          <input type ="text" id="restaurant" name="restaurant"/>
         </label>
         <br/>
-        <br/>
         <label>
-          Password:
-          <input type="password" id="pass_word" name="password" minlength="8" maxlength="24"/><br>
-            Must be at least 8 characters<br>
-            Must include at least one number and one uppercase letter
+          Description:
+          <input type="text" id="description" name="description" /><br>
         </label>
-        <br/>
         <br/>
         <button class="btn btn-success my-2 my-sm-0" type ="submit" value="Register" onclick="registerUser()">Register</button>
         </form>
