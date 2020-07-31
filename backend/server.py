@@ -28,7 +28,7 @@ def serve_login():
 	return static_file("login.html", root=file_root, mimetype="text/html")
 
 
-@app.post('/results'):
+@app.post('/results')
 @app.veiw("results.tpl")
 def serve_search():
 	"""
@@ -94,5 +94,15 @@ def serve_ajax():
 @app.get('/edit.js')
 def serve_ajax():
 	return static_file("ajax.js", root=file_root, mimetype="text/javascript")
+
+@app.post('/addItem')
+def serve_newItem():
+	req = request.body.read()
+	print(req)
+
+@app.post('/addSection')
+def serve_newSection():
+	req = request.body.read()
+	print(req)
 
 app.run(host='localhost', port=8080)

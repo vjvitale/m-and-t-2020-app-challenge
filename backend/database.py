@@ -1,11 +1,6 @@
 import mysql.connector
 
 
- """
-  IMPORTANT: RESTAURANTS NEED DESCRITPTIONS, 
- """
-
-
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
