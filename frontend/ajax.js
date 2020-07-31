@@ -27,9 +27,7 @@ function login(){
     // }
 }
 
-function loadEditPage(){
-    console.log("loading edit page")
-}
+
 
 function deletItem(){
 

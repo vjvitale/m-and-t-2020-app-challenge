@@ -11,7 +11,7 @@
             <hr>
             %for item in items.keys():
             <div class = "row, padding-left">
-                <h4>{{item}} &nbsp; <button type="button" class="btn btn-danger">delete section</button></h4>
+                <h4>{{item}} &nbsp; <button id={{section[item]}} type="button" class="btn btn-danger">delete section</button></h4>
             </div>
                 <ul style="list-style: none;" class = "padding-bottom">
                     %for vals in items[item]:
