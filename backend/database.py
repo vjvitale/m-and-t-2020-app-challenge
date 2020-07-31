@@ -17,8 +17,10 @@ my_cursor = mydb.cursor()
 # my_cursor.execute("")
 
 def loginUser(username, password):
-    #hash password before entering into database
-    my_cursor.execute("INSERT INTO users (username, passwoerd) VALUES (username, password)")
+    password = password.encode()
+    salt = os.urandom(16)
+    password_hash = hashlib.pbkdf2_hmac("sha256", password, salt, 100000)
+    my_cursor.execute("INSERT INTO users (username, password) VALUES (username, password_hash)")
 
 def delectionItem(item):
     name = item["name"]
