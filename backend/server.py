@@ -97,12 +97,43 @@ def serve_ajax():
 
 @app.post('/addItem')
 def serve_newItem():
-	req = request.body.read()
-	print(req)
+	section = {}
+	section["name"] = request.forms["item"]
+	section["price"] = request.forms["Price"]
+	section["description"] = request.forms["Desc"]
+	section["id"] = request.forms["sid"]
+
+	retVal = database.addItem(section)
+
+	return json.dumps(retVal)
+	
 
 @app.post('/addSection')
 def serve_newSection():
+	section = {}
+	rid = request.forms["rid"]
+	sectionName = request.forms["section"]
+	
+	retVal = database.addSection(section)
+
+	return json.dumps(retVal)
+
+@app.post("/removeItem")
+def serve_removeItem():
 	req = request.body.read()
-	print(req)
+	data = json.laods(req)
+
+	data.delectionItem(data)
+
+	return "deleted"
+
+@app.post("/removeSection")
+def serve_removeSection():
+	req = request.body.read()
+	data = json.laods(req)
+
+	data.delelteSection(data)
+
+	return "deleted"
 
 app.run(host='localhost', port=8080)
