@@ -10,6 +10,13 @@ function test(){
 function login(){
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
+    input = {"username": username, "password": password};
+    $.ajax({
+        type: "POST",
+        url: "/server.py", //Fix where it sends the data to cause
+        data: { param: input },
+        success: loadEditPage
+    });
     // console.log(username + " and " + password);
     // var request = new XMLHttpRequest();
     // request.onreadystatechange = function(){
@@ -18,6 +25,10 @@ function login(){
             
     //     }
     // }
+}
+
+function loadEditPage(){
+    console.log("loading edit page")
 }
 
 function deletItem(){
