@@ -13,7 +13,7 @@ This will run the server. You can then go to the url http://localhost:8080, http
 
 The database is in MySQL in which the 
 
-##Features
+## Features
 
 Our site is split between consumers and resturant owners. In doing this, it allows for owners to update their menus and add any new items. Customers can then view these items
 that the owners put on. On the menu, an item is listed under a section. For example you can have drinks, breakfast, etc. This allows seperation between all the items
