@@ -27,7 +27,13 @@ def deleteSection(s_id):
     my_cursor.execute("DELETE FROM menu-item WHERE section_id = %s", (s_id))
     my_cursor.execute("DELETE FROM section WHERE section_id = %s" (s_id))
 
+def updateRestaurantName(rid, name):
 
+    my_cursor.execute("UPDATE restaurant SET name = %s WHERE id = %s", (name, rid))
+
+def updateRestaurantdescription(rid, des):
+
+    my_cursor.execute("UPDATE restaurant SET description = %s WHERE id = %s", (des, rid))
 
 def addItem(item):
     name = item["name"]
@@ -70,7 +76,7 @@ def searchRestaurantId(rid):
     retVal = {}
     sectionItems = {}
 
-    mycursor.execute("SELECT name FROM restaurant WHERE id == rid")
+    mycursor.execute("SELECT name, description FROM restaurant WHERE id == rid")
     result = mycursor.fetchall()
 
 
@@ -85,10 +91,11 @@ def searchRestaurantId(rid):
         sectionName = section_result[0][i]
         sectionItems[sectionName] = items
 
-    retVal["name"] = result[0][1]
+    retVal["name"] = result[0][0]
     retVal["items"] = sectionItems
     retVal["sections"] = {}
     retVal["restaurant_id"] = rid
+    retVal["description"] = result[1][0]
 
     for sec in range(len(section_result[0])):
         retVal["sections"][section_result[0][sec]] = section_result[1][sec]

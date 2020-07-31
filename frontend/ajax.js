@@ -27,7 +27,37 @@ function login(){
     // }
 }
 
+function changeDescription(r_id){
 
+    var request = new XMLHttpRequest();
+    msg = document.getElementById("desc").value
+
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            var elem = document.getElementById("description");
+            elem.innerHTML = msg
+        }
+    }
+
+    request.open("POST", "/updateDesc")
+    request.send(JSON.stringify({"id": r_id, "description": msg}))
+}
+
+function changeName(r_id){
+
+    var request = new XMLHttpRequest();
+    msg = document.getElementById("r_name").value
+
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            var elem = document.getElementById("rest_name");
+            elem.innerHTML = msg
+        }
+    }
+
+    request.open("POST", "/updateName")
+    request.send(JSON.stringify({"id": r_id, "name": msg}))
+}
 
 function deletItem(item_id){
 
