@@ -28,4 +28,4 @@ adding an item or section.
 * bcrypt
 * hashlib
 * mysql.connector
-If I'm missing anything else then it is in the code.
+* If I'm missing anything else then it is in the code.
