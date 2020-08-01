@@ -1,7 +1,7 @@
 #Created by Veornica Vitale on 8 July 2020
 #Server using bottle
 
-from bottle import get, route, run, Bottle, static_file, view, request, redirect
+from bottle import get, route, run, Bottle, static_file, view, request, redirect,view
 import bottle
 import json
 import database
@@ -38,7 +38,7 @@ def serve_login():
 
 
 @app.post('/results')
-@veiw("results.tpl")
+@view("results.tpl")
 def serve_search():
  	"""
  	Template foramt
@@ -170,6 +170,18 @@ def processRegister():
 	# insert = "INSERT INTO restaurant (name, description) VALUES (restaurant, description)"
 	insert = ("INSERT INTO restaurant (name, description) VALUES ({},{})".format(restaurant,description))
 	mycursor.execute(insert)
+	mydb.commit()
+	redirect('/e/<resturant_name>')
+
+@app.post("/restaurant-search")
+def processRegister():
+	restaurant = request.forms["resName"]
+	# # this is where you should check if password meets criteria
+	# # if it does hash the pw and store it in the database
+	# insert = "INSERT INTO restaurant (name, description) VALUES (restaurant, description)"
+	select = "SELECT * FROM restaurant WHERE name = %s"
+	mycursor.execute(select, (restaurant,))
+	row = mycursor.fetchone()
 	mydb.commit()
 	redirect('/e/<resturant_name>')
 

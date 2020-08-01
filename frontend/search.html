@@ -31,10 +31,10 @@
       </nav>
         <div class="text-center vertical-center-row">
             <h1>Restaurant Search</h1>
-            <form>
+            <form action="/restaurant-search" method="post">
                 <label>RESTAURANT NAME: </label>
-                <input type = "text" id = "searchbar">
-                <input type = "button"  onclick =submitSearch() class="btn btn-light" value="Search">
+                <input type = "text" id = "searchbar" name ="resName">
+                <input type = "button"  onclick =search() class="btn btn-light" value="Search">
             </form>
         </div>
         <div class="fixed-bottom">
