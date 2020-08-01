@@ -159,9 +159,9 @@ def processRegister():
         mycursor.execute("SELECT LAST_INSERT_ID();")
         res = mydb.fetchone()
 
-        print("if this is not one number ummm make it that way: " res)
+        # print("if this is not one number ummm make it that way: " res)
 
-        redirect('/e/' + res)
+        redirect('/e/<resturant_name>')
     else:
         return checkCriteria(str(password))
 
@@ -183,18 +183,20 @@ def processRegister():
 	insert = ("INSERT INTO restaurant (name, description) VALUES ({},{})".format(restaurant,description))
 	mycursor.execute(insert)
 	mydb.commit()
-	redirect('/e/<resturant_name>')
+	return
 
 @app.post("/restaurant-search")
 def processRegister():
-	restaurant = request.forms["resName"]
+	res_name= request.forms["resName"]
+	print(res_name)
 	# # this is where you should check if password meets criteria
 	# # if it does hash the pw and store it in the database
 	# insert = "INSERT INTO restaurant (name, description) VALUES (restaurant, description)"
-	select = "SELECT * FROM restaurant WHERE name = %s"
-	mycursor.execute(select, (restaurant,))
+	select = ("SELECT * FROM restaurant WHERE name = %s", (res_name))
+	mycursor.execute(select)
 	row = mycursor.fetchone()
 	mydb.commit()
+	print(row)
 	redirect('/e/<resturant_name>')
 
 def checkCriteria(password):

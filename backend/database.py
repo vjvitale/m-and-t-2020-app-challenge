@@ -25,7 +25,7 @@ def deleteSection(s_id):
     #Need to implement backend part
     
     my_cursor.execute("DELETE FROM menu-item WHERE section_id = %s", (s_id))
-    my_cursor.execute("DELETE FROM section WHERE section_id = %s" (s_id))
+    my_cursor.execute("DELETE FROM section WHERE section_id = %s", (s_id))
 
 def updateRestaurantName(rid, name):
 
@@ -60,7 +60,7 @@ def addSection(section):
 def searchRestaurant(resturant_name):
     retVal = {"restaurant": []}
     sectionItems = {}
-    my_cursor.execute("SELECT name, id, description FROM restaurant WHERE name == resturant_name")
+    my_cursor.execute("SELECT name, id, description FROM restaurant WHERE name = %s", (resturant_name))
     result = my_cursor.fetchall()
     if len(result[0]) == 0:
         return retVal
@@ -75,15 +75,15 @@ def searchRestaurant(resturant_name):
 def searchRestaurantId(rid):
     retVal = {}
     sectionItems = {}
-
-    mycursor.execute("SELECT name, description FROM restaurant WHERE id == rid")
-    result = mycursor.fetchall()
-    my_cursor.execute("SELECT name, id FROM section WHERE restaurant_id == rid")
+    print(rid)
+    # my_cursor.execute("SELECT name, description FROM restaurant WHERE id = %s", (rid))
+    # result = my_cursor.fetchall()
+    my_cursor.execute("SELECT name, id FROM section WHERE name = %s", (rid))
     section_result = my_cursor.fetchall()
 
     for i in range(0, len(section_result[1])):
         sId = section_result[1][i]
-        my_cursor.execute("SELECT name, price, description FROM menu-item WHERE section_id == sId")
+        my_cursor.execute("SELECT name, price, description FROM menu-item WHERE section_id = sId")
         items = my_cursor.fetchall()
         sectionName = section_result[0][i]
         sectionItems[sectionName] = items
