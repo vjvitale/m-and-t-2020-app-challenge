@@ -19,3 +19,13 @@ Our site is split between consumers and resturant owners. In doing this, it allo
 that the owners put on. On the menu, an item is listed under a section. For example you can have drinks, breakfast, etc. This allows seperation between all the items
 on the menu and makes it look more like a menu one would see at the resturant. Owners can login into the site to access and change the menu up by deleting an item, section or
 adding an item or section. 
+
+## Libaries Used
+
+*Bootstrap
+*Bottle
+*JSON
+*bcrypt
+*hashlib
+*mysql.connector
+If I'm missing anything else then it is in the code.
