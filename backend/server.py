@@ -37,20 +37,24 @@ def serve_login():
 	return static_file("login.html", root=file_root, mimetype="text/html")
 
 
-# @app.post('/results')
-# @veiw("results.tpl")
-# def serve_search():
-# 	"""
-# 	Template foramt
-# 	a dictionary with one key resturants
-# 	resturants is a list of lists
-# 	 the frist element of each list is the name, the second is the description and the third is the id
-# 	"""
-# 	retVal = {"restuarunt": []}
+@app.post('/results')
+@veiw("results.tpl")
+def serve_search():
+ 	"""
+ 	Template foramt
+ 	a dictionary with one key resturants
+ 	resturants is a list of lists
+ 	 the frist element of each list is the name, the second is the description and the third is the id
+ 	"""
 
-# 	retVal = database.searchRestaurant("RESTAURNT NAME FROM REQUEST")
+ 	msg = request.forms("query")
 
-# 	return retVal
+
+ 	retVal = {"restuarunt": []}
+
+ 	retVal = database.searchRestaurant(msg)
+
+ 	return retVal
 
 
 #serves the restuarunt's menu
