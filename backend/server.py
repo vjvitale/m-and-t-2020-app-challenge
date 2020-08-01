@@ -149,7 +149,19 @@ def processRegister():
         reg_val = (username, hashedpw)
         mycursor.execute(reg_stmt, reg_val)
         mydb.commit()
-        redirect('/restaurant')
+
+        mycursor.execute("SELECT id FROM users WHERE username = %s AND password = %s", (username, hashedpw))
+        result = mydb.fetchone()
+
+        mycursor.execute("INSERT INTO restaurant(name, user_id, description) VALUES (%s, %s, %s)", ("Restaurant", "Description goes here", result[0]))
+        mydb.commit()
+
+        mycursor.execute("SELECT LAST_INSERT_ID();")
+        res = mydb.fetchone()
+
+        print("if this is not one number ummm make it that way: " res)
+
+        redirect('/e/' + res)
     else:
         return checkCriteria(str(password))
 
