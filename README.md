@@ -22,10 +22,10 @@ adding an item or section.
 
 ## Libaries Used
 
-*Bootstrap
-*Bottle
-*JSON
-*bcrypt
-*hashlib
-*mysql.connector
+* Bootstrap
+* Bottle
+* JSON
+* bcrypt
+* hashlib
+* mysql.connector
 If I'm missing anything else then it is in the code.
