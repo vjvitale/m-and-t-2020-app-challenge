@@ -145,7 +145,7 @@ def processRegister():
         reg_val = (username, hashedpw)
         mycursor.execute(reg_stmt, reg_val)
         mydb.commit()
-        redirect('/login')
+        redirect('/restaurant')
     else:
         return checkCriteria(str(password))
 
@@ -153,10 +153,21 @@ def processRegister():
 def serveRegister():
     return static_file("register.html", root=file_root, mimetype="text/html")
 
-# @app.get('/login')
-# def serveLogin():
-#     return static_file("login.html", root= file_root, mimetype="text/html")
+@app.get("/restaurant")
+def serveRegister():
+    return static_file("restaurant_setup.html", root=file_root, mimetype="text/html")
 
+@app.post("/restaurant-setup")
+def processRegister():
+	restaurant = request.forms["restaurant"]
+	description = request.forms["description"]
+	# # this is where you should check if password meets criteria
+	# # if it does hash the pw and store it in the database
+	# insert = "INSERT INTO restaurant (name, description) VALUES (restaurant, description)"
+	insert = ("INSERT INTO restaurant (name, description) VALUES ({},{})".format(restaurant,description))
+	mycursor.execute(insert)
+	mydb.commit()
+	redirect('/e/<resturant_name>')
 
 def checkCriteria(password):
     if len(password) < 8:

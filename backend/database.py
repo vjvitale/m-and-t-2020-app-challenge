@@ -61,7 +61,7 @@ def searchRestaurant(resturant_name):
     retVal = {"restaurant": []}
     sectionItems = {}
     my_cursor.execute("SELECT name, id, description FROM restaurant WHERE name == resturant_name")
-    result = my_cursor  .fetchall()
+    result = my_cursor.fetchall()
     if len(result[0]) == 0:
         return retVal
     else:
